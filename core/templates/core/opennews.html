@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}أخبار {{ league.name_ar }} {% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'core/indexpage.css' %}" />
+
+<nav>
+    <div id="league-container" style="background-color:white;">
+      <a class="btn btn-info" href="{% url 'core:openallclubs' league.pk %}"><h2 style="color:gold;">الفرق</h2></a>
+      <a class="btn btn-info" href="{% url 'core:leaguerank' league.pk %}"><h2 style="color:gold;">الترتيب</h2></a>
+      <a class="btn btn-info" href="{% url 'core:leaguematchs' league.pk %}"><h2 style="color:gold;">المباريات</h2></a>
+      <a class="btn btn-info" href="{% url 'core:opennews' league.pk %}"><h2 style="color:gold;">اخبار</h2></a>
+    </div>
+</nav>
+
+<h1>أخبار {{ league.name_ar }} </h1>
+
+{% for n in news %}
+  <div style="text-align: center;">
+    <a href="{% url 'core:newsdetail' n.pk %}"><h5>{{ n.news_title }}</h5><img src="{{ n.news_image.url }}" class="center" /></a>
+    <br>
+  </div>
+{% endfor %}
+
+{% endblock %}

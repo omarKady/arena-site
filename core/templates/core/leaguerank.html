@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ترتيب {{ league.name_ar }}{% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'core/indexpage.css' %}" />
+<style>
+  table, th, td {
+    border: 1px solid blue;
+    text-align: center;
+    margin: 0 auto;
+  }
+  </style>
+<nav>
+    <div id="league-container" style="background-color:white;">
+        <a class="btn btn-info" href="{% url 'core:openallclubs' league.pk %}"><h2 style="color:gold;">الفرق</h2></a>
+        <a class="btn btn-info" href="{% url 'core:leaguerank' league.pk %}"><h2 style="color:gold;">الترتيب</h2></a>
+        <a class="btn btn-info" href="{% url 'core:leaguematchs' league.pk %}"><h2 style="color:gold;">المباريات</h2></a>
+        <a class="btn btn-info" href="{% url 'core:opennews' league.pk %}"><h2 style="color:gold;">اخبار</h2></a>
+    </div>
+</nav>
+
+<h2 style="text-align:center;color:red; padding: 20px 0px;">جدول الترتيب</h2>
+
+<table class="table table-sm table-hover">
+  <tr class="table-primary">
+    <th>نقاط</th><th colspan="3">اهداف</th><th>خسارة</th><th>تعادل</th><th>فوز</th><th>الفريق</th><th>ترتيب</th>
+  </tr>
+  {% for club in clubs %}
+  <tr>
+    <th>{{club.total_points}}</th><th>{{club.goal_diff}}</th><th>{{club.goal_against}}</th><th>{{club.goal_for}}</th><th>{{club.lost}}</th><th>{{club.draw}}</th><th>{{club.won}}</th><th><a href="{% url 'core:clubpage' club.pk %}" style="color: blue;">{{club.name}}</a></th><th>{{ forloop.counter  }}</th>
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+  
+
+{% endblock %}
+
+
+  

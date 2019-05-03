@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}Arena Site{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'core/indexpage.css' %}" />
+
+
+{% for news in latest_news %}
+<div style="text-align: center;">
+  <a href="{% url 'core:newsdetail' pk=news.pk %}"><h5>{{ news.news_title }}</h5><img src="{{ news.news_image.url }}" height="500" width="700" /></a>
+  <br>
+  <a href="{% url 'core:newsdetail' pk=news.pk %}">comments: {{ news.comments.count}} </a>
+</div>
+{% endfor %}
+
+{% endblock %}

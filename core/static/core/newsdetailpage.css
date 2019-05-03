@@ -1,0 +1,41 @@
+p{
+    text-align: center;
+    font-weight: bold;
+    color: #5f2470;
+    margin-top: 0;
+    margin-right: 45px;
+    font-size: 25px;
+}
+
+img{
+    height: 40%;
+    width: 30%;
+    padding: 10px 30px;
+}
+
+#news-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+  
+#item {
+    width: 400px;
+  }
+
+  #social li{
+    background-color: lightcyan;
+    list-style-type: none;
+    display: inline-block;
+    padding: 2px 2px;
+  }
+
+  #social {
+    text-align: center;
+  }
+
+  .comment {
+    margin: 20px;
+  }

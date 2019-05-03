@@ -1,0 +1,57 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+        <link rel="stylesheet" type="text/css" href="{% static 'core/basepage.css'%}" />
+    </head>
+    <body>
+
+   <nav class="navbar" id="navbar">
+     
+      {% if user.is_authenticated %}
+       <h4>logged in as {{ user.username }}</h4>
+     {% endif %}
+
+      <h6 id="second-title">we love football</h6> 
+    
+     <ul>
+       <li><a href="{% url 'core:contact' %}">اتصل بنا</a></li>
+       
+       {% if user.is_authenticated %}
+         <li><a href="{% url 'core:logout' %}">خروج</a></li>
+       {% else %}
+         <li><a href="{% url 'core:signup' %}" >التسجيل</a></li>
+         <li><a href="{% url 'core:login' %}" >الدخول</a></li>
+       {% endif %}
+    
+       
+       
+       <li><a href="{% url 'core:home' %}" >الرئيسية</a></li>
+     </ul>
+     <a href="{% url 'core:home' %}"><h1>Arena</h1></a>
+     
+     <div class="container-fluid" >
+
+      {% for l in  leagues  %}
+          <a href="{% url 'core:openleague' l.pk %}"><button class="btn-info" ><h2 style="color:white;">{{ l.name_ar }}</h2></button></a>
+      {% endfor %}
+    </div>
+    
+    </nav>
+
+          <main>
+          {% block content %}
+        {% endblock %}
+      </main>
+
+
+        
+    </body>
+</html>

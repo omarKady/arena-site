@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}مباريات {{ league.name_ar }}{% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'core/indexpage.css' %}" />
+<style>
+  table, th, td {
+    border: 1px solid blue;
+    text-align: center;
+    margin: 0 auto
+  }
+  </style>
+<nav>
+    <div id="league-container" style="background-color:white;">
+        <a class="btn btn-info" href="{% url 'core:openallclubs' league.pk %}"><h2 style="color:gold;">الفرق</h2></a>
+        <a class="btn btn-info" href="{% url 'core:leaguerank' league.pk %}"><h2 style="color:gold;">الترتيب</h2></a>
+        <a class="btn btn-info" href="{% url 'core:leaguematchs' league.pk %}"><h2 style="color:gold;">المباريات</h2></a>
+        <a class="btn btn-info" href="{% url 'core:opennews' league.pk %}"><h2 style="color:gold;">اخبار</h2></a>
+    </div>
+</nav>
+
+<h2 style="text-align:center;color:red; padding: 20px 0px;">جدول المباريات</h2>
+
+<table class="table table-sm table-hover">
+  {% for match in matchs %}
+  <tr class="table-primary">
+    <th colspan="5">{{ match.play_date.date }}</th>
+  </tr>
+  <tr>
+    <th>{{ match.play_date.time }}</th><th><a href="{% url 'core:clubpage' match.club_local.pk %}" style="color: blue;">{{ match.club_local }}</a></th><th>{{ match.score_local }}</th><th>{{ match.score_visitor }}</th><th><a href="{% url 'core:clubpage' match.club_visitor.pk %}" style="color: blue;">{{ match.club_visitor }}</a></th>
+  </tr>
+  {% endfor %}
+</table>
+
+
+  
+
+{% endblock %}
